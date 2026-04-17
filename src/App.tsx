@@ -3,14 +3,15 @@ import AuthLayout from "./layouts/AuthLayout";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Public route (no layout) */}
+        {/* Login */}
         <Route
-          path="/Login"
+          path="/login"
           element={
             <AuthLayout>
               <Login />
@@ -18,17 +19,20 @@ function App() {
           }
         />
 
-        {/* Protected / main app routes */}
-        <Route path="*" element={<Navigate to="/login" replace />} />
-
+        {/* Protected Dashboard */}
         <Route
-          path="/Dashboard"
+          path="/dashboard"
           element={
-            <MainLayout>
-              <Dashboard />
-            </MainLayout>
+            <ProtectedRoute>
+              <MainLayout>
+                <Dashboard />
+              </MainLayout>
+            </ProtectedRoute>
           }
         />
+
+        {/* Catch-all (ALWAYS LAST) */}
+        <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </BrowserRouter>
   );
