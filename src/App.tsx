@@ -1,21 +1,31 @@
 import MainLayout from "./layouts/MainLayout";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AuthLayout from "./layouts/AuthLayout";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
-import Home from "./pages/Home";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         {/* Public route (no layout) */}
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/Login"
+          element={
+            <AuthLayout>
+              <Login />
+            </AuthLayout>
+          }
+        />
 
         {/* Protected / main app routes */}
+        <Route path="*" element={<Navigate to="/login" replace />} />
+
         <Route
-          path="/"
+          path="/Dashboard"
           element={
             <MainLayout>
-              <Home />
+              <Dashboard />
             </MainLayout>
           }
         />

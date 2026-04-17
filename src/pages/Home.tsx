@@ -2,7 +2,7 @@ import { Card, Typography } from "@mui/joy";
 const Home = () => {
   return (
     <Card variant="outlined">
-      <Typography level="h2">Dashboard</Typography>
+      <Typography level="h2">Home</Typography>
       <Typography level="body-md">Welcome to Incentive portal</Typography>
     </Card>
   );
